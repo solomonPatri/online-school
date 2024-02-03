@@ -36,9 +36,7 @@ namespace online_school.Book.model
             string desc = " ";
             desc += "Carte: " + this._nameBook + "\n";
 
-
-
-
+            return desc; 
 
         }
 
