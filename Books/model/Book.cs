@@ -8,14 +8,31 @@ namespace online_school.Books.model
 {
     public class Book
     {
+        private int _id;
         private int _studentId;
         private string _nameBook;
 
+        public Book(int idbook, string nume, int studentId)
+        {
+
+            _id = idbook;
+            _nameBook = nume;
+            _studentId = studentId;
+
+        }
+        public Book( string nume, int studentId)
+        {
+
+            _nameBook = nume;
+            _studentId = studentId;
+        }
 
 
-
-
-
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         public int StudentId
         {
@@ -41,12 +58,7 @@ namespace online_school.Books.model
         }
 
 
-        public Book (string nume,int studentId)
-        {
-            _nameBook = nume;
-            _studentId = studentId;
-
-        }
+      
 
 
 

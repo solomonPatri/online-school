@@ -65,6 +65,11 @@ namespace online_school.Student.model
             _email = Email;
             _age = Age;
         }
+        public Students(int id,string Firstname)
+        {
+            _id = id;
+            _firstnameStudent = Firstname;
+        }
 
 
 

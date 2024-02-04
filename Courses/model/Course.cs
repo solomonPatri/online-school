@@ -4,14 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace online_school.Course.model
+namespace online_school.Courses.model
 {
     public  class Course
     {
+        private int _id;
         private string _nameCurs;
         private string _departament;
 
 
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
 
         public string NameCurs
@@ -24,6 +31,19 @@ namespace online_school.Course.model
         {
             get { return _departament; }
             set { _departament = value; }
+
+        }
+        public Course (int Id,string NameCurs, string Departament)
+        {
+            _id = Id;
+            _nameCurs = NameCurs;   
+            _departament = Departament;
+        }
+
+        public Course (string nameCurs, string departament)
+        {
+            _nameCurs = nameCurs;
+            _departament = departament;
 
         }
 
@@ -39,7 +59,7 @@ namespace online_school.Course.model
 
         }
 
-
+        
 
 
 

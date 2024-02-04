@@ -1,6 +1,7 @@
 ﻿using online_school.Books.model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -14,27 +15,32 @@ namespace online_school.Books.Services
         private List<Book> _books;
         public ServiceBook()
         {
-
-            _books = new List<Book>();
+          
             this.load();
-
+         
 
         }
 
         public void load()
         {
-            Book b1 = new Book("Matematica", GenerateStudentId());
-            Book b2 = new Book("Literatura", GenerateStudentId());
-            Book b3 = new Book("Engleza", GenerateStudentId());
-            Book b4 = new Book("Sport", GenerateStudentId());
+            _books = new List<Book>()
+            {
+                new Book(1, "Book 1", 101),
+                new Book(2, "Book 2", 102),
+                new Book(3, "Book 3", 103),
+                new Book(4, "Book 4", 104),
+                new Book(5, "Book 5", 105),
+                new Book(6, "Book 6", 106),
+                new Book(7, "Book 7", 107),
+                new Book(8, "Book 8", 108),
+                new Book(9, "Book 9", 109),
+                new Book(10, "Book 10", 110)
 
-            _books.Add(b1);
-            _books.Add(b2);
-            _books.Add(b3);
-            _books.Add(b4);
+            };
+
 
         }
-        public void afisareBook()
+        public void afisareBook()   
         {
             for (int i = 0; i < _books.Count; i++)
             {
@@ -42,7 +48,6 @@ namespace online_school.Books.Services
             }
 
         }
-
         public bool deleteBook(string nume, int studentid)
         {
             List<Book> book = _books;
@@ -60,33 +65,42 @@ namespace online_school.Books.Services
 
 
         }
-        public int GenerateStudentId()
-        {
-            Random random = new Random();
-            int randomnumber = random.Next(1, 100001);
-            while (randomnumber != null)
-            {
-                randomnumber = random.Next(1, 100001);
-
-            }
-
-            return randomnumber;
-
-        }
-        public Book returnbook(Book book)
+        public Book GetBookById(int id)
         {
             List<Book> books = _books;
-            for(int i =0; i < _books.Count; i++)
+            for(int i=0; i<books.Count; i++)
             {
-                if (book.Equals(books[i]))
+                if (books[i].Id == id)
                 {
                     return books[i];
-                }
-            }
-            return book;
-        }
-       
 
+
+                }
+
+            }
+            return null;
+
+        }
+        public void adaugareBook(Book newcarte)
+        {
+            newcarte.Id = this.GenerateIdUnique();
+            this._books.Add(newcarte);
+
+        }
+        public int GenerateIdUnique()
+        {
+            Random random = new Random();
+            int nrrandom = random.Next(100, 10000);
+
+            while(GetBookById(nrrandom) != null)
+            {
+                nrrandom = random.Next(100, 10000);
+            }
+
+            return nrrandom;
+
+
+        }
 
 
     }

@@ -20,73 +20,70 @@ namespace online_school.Student.service
 
         public void load()
         {
-            Students s1 = new Students(GenerateStudentId(),"Mario","Solomon","solomonmario@gmail.com",18);
-            Students s2 = new Students(GenerateStudentId(), "Ana", "Mihaciu", "MihaAna@yahoo.com", 23);
-            Students s3 = new Students(GenerateStudentId(),"Silviu","Dancanet","silviu32@gmail.com",22);
-            Students s4 = new Students(GenerateStudentId(), "Magda", "Mustantean", "MMagdalena34@yahoo.com", 17);
+            Students s1 = new Students(1,"Mario","Solomon","solomonmario@gmail.com",18);
+            Students s2 = new Students(2, "Ana", "Mihaciu", "MihaAna@yahoo.com", 23);
+            Students s3 = new Students(3,"Silviu","Dancanet","silviu32@gmail.com",22);
+            Students s4 = new Students(4, "Magda", "Mustantean", "MMagdalena34@yahoo.com", 17);
 
             _student.Add(s1);
             _student.Add(s2);
             _student.Add(s3);
             _student.Add(s4);
         }
-        public int GenerateStudentId()
-        {
-            Random random = new Random();
-            int randomnumber = random.Next(1, 100001);
-            while (randomnumber != null)
-            {
-                randomnumber = random.Next(1, 100001);
-
-            }
-
-            return randomnumber;
-
-        }
+        
         public void afisarestudent()
         {
             for(int i=0;i< _student.Count;i++)
             {
                 Console.WriteLine(_student[i].DescriereStudent());
-
-
             }
 
-
         }
-        public bool adaugarestudent(Students student)
+        public Students GetStudentsById(int idstudent)
         {
             List<Students> students = _student;
-
             for(int i=0;i< students.Count;i++)
             {
-                if (students[i] != student)
+                if (students[i].Id == idstudent)
                 {
-                    students.Add(student);
-                    return true;
+                    return students[i];
                 }
 
             }
-            return false;
-
+            return null;
         }
-        public bool deleteStudent(string name)
+        public int GenerateStudentId()
         {
-            List<Students> students = _student;
-            for(int i=0;i< students.Count; i++)
+            Random random = new Random();
+            int randomnumber = random.Next(10, 10001);
+            while(GetStudentsById(randomnumber) != null)
             {
-                if (name.Equals(students[i].FirstnameStudent))
+
+                randomnumber = random.Next(10, 10001);
+
+            }
+            return randomnumber;
+
+        }
+        public void adaugareStudent(Students newstudent)
+        {
+            newstudent.Id = GenerateStudentId();
+            this._student.Add(newstudent);
+        }
+        public bool DeleteStudent(int Idstudent,string Firstname)
+        {
+            List<Students> student = _student;
+            for(int i=0;i< student.Count;i++)
+            {
+                if (student[i].Id == Idstudent && student[i].FirstnameStudent.Equals(Firstname))
                 {
-                    this._student.Remove(students[i]);
+
+                    this._student.Remove(student[i]);
                     return true;
                 }
             }
             return false;
-
         }
-
-
-
 
 
 
