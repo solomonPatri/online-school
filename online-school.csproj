@@ -8,11 +8,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Book\Service\" />
-    <Folder Include="Course\service\" />
-    <Folder Include="Enrolment\Service\" />
-    <Folder Include="Student\service\" />
-  </ItemGroup>
-
 </Project>

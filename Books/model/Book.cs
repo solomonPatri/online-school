@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace online_school.Book.model
+namespace online_school.Books.model
 {
     public class Book
     {
@@ -41,7 +41,12 @@ namespace online_school.Book.model
         }
 
 
+        public Book (string nume,int studentId)
+        {
+            _nameBook = nume;
+            _studentId = studentId;
 
+        }
 
 
 
