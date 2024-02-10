@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace online_school.Enrolment.Service
 {
-    internal class ServiceEnrolment
+    public class ServiceEnrolment
     {
+        
+
+
+        
+
+
+
+
+
     }
 }

@@ -11,10 +11,10 @@ namespace online_school.Student.model
     {
         private int _id;
         private string _firstnameStudent;
-        private string _lastnameStudent;
+        private string _facultate;
         private string _email;
         private int _age;
-
+        private string _password;
 
 
         public int Id
@@ -27,10 +27,10 @@ namespace online_school.Student.model
             get { return _firstnameStudent; }
             set { _firstnameStudent = value; }
         }
-        public string LastnameStudent
+        public string Facultate
         {
-            get { return _lastnameStudent; }
-            set { _lastnameStudent = value; }
+            get { return _facultate; }
+            set { _facultate = value; }
 
         }
         public string Email
@@ -45,25 +45,33 @@ namespace online_school.Student.model
             set { _age = value; }
 
         }
+        public string Password
+        {
+            get { return _password ; }
+            set { _password = value; }
+
+        }
+
 
         public string DescriereStudent()
         {
             string desc = " ";
             desc += "Prenume: " + this._firstnameStudent + "\n";
-            desc += "Nume: " + this._lastnameStudent + "\n";
+            desc += "Facultate: " + this._facultate + "\n";
             desc += "Email: " + this._email + "\n";
             desc += "Varsta: " + this._age + "\n";
             return desc;
 
         }
 
-        public Students(int id,string FirstName,string LastName,string Email,int Age)
+        public Students(int id,string FirstName,string Facultate,string Email,int Age,string pass)
         {
             _id = id;
             _firstnameStudent= FirstName;
-            _lastnameStudent= LastName;
+            _facultate= Facultate;
             _email = Email;
             _age = Age;
+            _password = pass;
         }
         public Students(int id,string Firstname)
         {

@@ -51,8 +51,9 @@ namespace online_school.Courses.model
         public string DescriereCurs()
         {
             string desc = "  ";
-            desc += "Titlul: " + this._nameCurs+"\n";
             desc += "Departament: " + this._departament + "\n";
+            desc += "Titlul: " + this._nameCurs+"\n";
+            
             return desc;
 
 

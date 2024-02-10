@@ -1,4 +1,5 @@
 ﻿using online_school.Books.model;
+using online_school.Student.model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -25,16 +26,16 @@ namespace online_school.Books.Services
         {
             _books = new List<Book>()
             {
-                new Book(1, "Book 1", 101),
-                new Book(2, "Book 2", 102),
-                new Book(3, "Book 3", 103),
-                new Book(4, "Book 4", 104),
-                new Book(5, "Book 5", 105),
-                new Book(6, "Book 6", 106),
-                new Book(7, "Book 7", 107),
-                new Book(8, "Book 8", 108),
-                new Book(9, "Book 9", 109),
-                new Book(10, "Book 10", 110)
+                new Book(1, "Matematica ", 9),
+                new Book(2, "Inginerie", 2),
+                new Book(3, "Medicina", 3),
+                new Book(4, "Literatura", 4),
+                new Book(5, "Istorie", 9),
+                new Book(6, "Geografie", 6),
+                new Book(7, "Informatica", 7),
+                new Book(8, "Matematica", 9),
+                new Book(9, "Inginerie", 9),
+                new Book(10, "Spaniola", 10),
 
             };
 
@@ -48,23 +49,7 @@ namespace online_school.Books.Services
             }
 
         }
-        public bool deleteBook(string nume, int studentid)
-        {
-            List<Book> book = _books;
-
-            for (int i = 0; i < book.Count; i++)
-            {
-                if (nume.Equals(book[i].NameBook) && studentid.Equals(book[i].StudentId))
-                {
-                    this._books.Remove(book[i]);
-                    return true;
-                }
-
-            }
-            return false;
-
-
-        }
+        
         public Book GetBookById(int id)
         {
             List<Book> books = _books;
@@ -101,6 +86,74 @@ namespace online_school.Books.Services
 
 
         }
+
+        
+        public List<Book> FiltrareByStudentId(int studentid)
+        {
+            List<Book> book = new List<Book> ();
+            for(int i =0;i< _books.Count;i++)
+            {
+                if (_books[i].StudentId == studentid)
+                {
+                    book.Add(_books[i]);
+                }
+
+            }
+            return book;
+
+        }
+        public void SortaredupaNume()
+        {
+            List<Book> books = _books;
+
+            for (int i = 0; i < books.Count - 1; i++)
+            {
+                for (int j = i + 1; j < books.Count; j++)
+                {
+                    if (books[i].NameBook.Equals(books[j].NameBook))
+                    {
+                        Book aux = books[i];
+                        books[i] = books[j];
+                        books[j] = aux;
+
+                    }
+                }
+            }
+
+        }
+        public List<Book> BooksLista(int StudentId)
+        {
+            List<Book> books = FiltrareByStudentId(StudentId);
+ 
+            for (int i = 0; i < books.Count; i++)
+            {
+                Console.WriteLine(books[i].DescriereBook());
+                
+            }
+            return books;
+        }
+        public bool deleteBook(string numeales, int studentid)
+        {
+            List<Book> book = BooksLista(studentid);
+
+            for (int i = 0; i < book.Count; i++)
+            {
+                if (book[i].NameBook.Equals(numeales))
+                {
+                    book.Remove(book[i]);
+                    return true;
+                }
+
+            }
+            return false;
+
+
+        } // trebuie correctat
+
+
+
+
+
 
 
     }

@@ -20,10 +20,10 @@ namespace online_school.Student.service
 
         public void load()
         {
-            Students s1 = new Students(1,"Mario","Solomon","solomonmario@gmail.com",18);
-            Students s2 = new Students(2, "Ana", "Mihaciu", "MihaAna@yahoo.com", 23);
-            Students s3 = new Students(3,"Silviu","Dancanet","silviu32@gmail.com",22);
-            Students s4 = new Students(4, "Magda", "Mustantean", "MMagdalena34@yahoo.com", 17);
+            Students s1 = new Students(1,"Mario","Matematica","solomonmario@gmail.com",18," ");
+            Students s2 = new Students(2, "Ana", "Inginerie", "MihaAna@yahoo.com", 23," ");
+            Students s3 = new Students(3,"Silviu","Informatica","silviu32@gmail.com",22, " ");
+            Students s4 = new Students(4, "Magda", "Literatura", "MMagdalena34@yahoo.com", 17, " ");
 
             _student.Add(s1);
             _student.Add(s2);
@@ -69,6 +69,7 @@ namespace online_school.Student.service
         {
             newstudent.Id = GenerateStudentId();
             this._student.Add(newstudent);
+
         }
         public bool DeleteStudent(int Idstudent,string Firstname)
         {
@@ -84,6 +85,28 @@ namespace online_school.Student.service
             }
             return false;
         }
+
+        public List<Students> AfisareListaStudenti()
+        {
+            List<Students> studentii = _student;
+
+            for(int i =0; i < studentii.Count; i++)
+            {
+
+                Console.WriteLine(studentii[i].DescriereStudent());
+                Console.WriteLine("\n");
+
+            }
+
+            return studentii;
+        }
+
+
+
+
+
+
+
 
 
 

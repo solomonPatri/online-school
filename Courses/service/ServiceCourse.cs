@@ -1,4 +1,5 @@
 ﻿using online_school.Courses.model;
+using online_school.Student.model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,10 +89,78 @@ namespace online_school.Courses.service
             course.Id = this.GenerateIdUniqueCurs();
             this._curs.Add(course);
         }
+        public void sortareAlfaCourse()
+        {
+            for(int i=0;i< _curs.Count-1 ;i++)
+            {
+                for(int j = i+1;j<_curs.Count;j++)
+                {
+                    if (_curs[i].Departament.CompareTo(_curs[j].Departament)>0) {
+                         
+                        Course aux = _curs[i];
+                        _curs[i] = _curs[j];
+                        _curs[j] = aux;
+                    }
+                }
+            }
+        }
+
+        public List<Course> AfisareListaCourse()
+        {
+            List<Course> curs = _curs;
+            sortareAlfaCourse();
+            for(int i=0;i<curs.Count;i++)
+            {
+                Console.WriteLine(curs[i].DescriereCurs());
+                
+
+            }
+
+            return curs;
+        }
+
+        public List<Course> FiltrarecursByProfesie(string studentFacultate)
+        {
+            List<Course> cursuri = new List<Course>();
+            for(int i =0;i<_curs.Count;i++)
+            {
+                if (_curs[i].Departament.Equals(studentFacultate))
+                {
+                    cursuri.Add(_curs[i]);
+
+                }
+            }
+            return cursuri;
+        }
+       public bool ModificareCurs( Course DeUpdate, String NumeMod,string studentFacult)
+        {
+            List<Course> cursmod = FiltrarecursByProfesie(studentFacult);
+            for(int i = 0; i < cursmod.Count; i++)
+            {
+                if (NumeMod.Equals(cursmod[i])){
+
+
+                    if(!DeUpdate.NameCurs.Equals(" "))
+                    {
+                        cursmod[i].NameCurs = DeUpdate.NameCurs;
+
+                    }
+                    if(!DeUpdate.Departament.Equals(" "))
+                    {
+                        cursmod[i].Departament = DeUpdate.Departament;
+
+
+                    }
+                    return true;
+                }
 
 
 
 
+            }
+            return false;
+        }
+       
 
 
 
