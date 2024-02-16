@@ -18,16 +18,16 @@ namespace online_school.Courses.service
             this.load();
 
         }
-            
+
         public void load()
         {
-            Course c1 = new Course(1,"Analiza matematica", "Matematica");
-            Course c2 = new Course(2,"Mecanica", "Inginerie");
-            Course c3 = new Course(3,"Literatura sec XI", "Romana");
-            Course c4 = new Course(4,"Algebra", "Matematica");
-            Course c5 = new Course(5,"Stefan cel mare ", "Istorie");
-            Course c6 = new Course(6,"Electronica", "Inginerie");
-            Course c7 = new Course(7,"Anatomie ", "Medicina");
+            Course c1 = new Course(10, "Analiza matematica", "Matematica");
+            Course c2 = new Course(20, "Mecanica", "Inginerie");
+            Course c3 = new Course(30, "Literatura sec XI", "Romana");
+            Course c4 = new Course(40, "Algebra", "Matematica");
+            Course c5 = new Course(50, "Stefan cel mare ", "Istorie");
+            Course c6 = new Course(60, "Electronica", "Inginerie");
+            Course c7 = new Course(70, "Anatomie ", "Medicina");
 
             _curs.Add(c1);
             _curs.Add(c2);
@@ -38,10 +38,10 @@ namespace online_school.Courses.service
             _curs.Add(c7);
 
         }
-            
-        public void afisare()
+
+        public void afisareCurs()
         {
-            for(int i=0;i< _curs.Count;i++)
+            for (int i = 0; i < _curs.Count; i++)
             {
                 Console.WriteLine(_curs[i].DescriereCurs());
             }
@@ -49,7 +49,7 @@ namespace online_school.Courses.service
         public bool deleteCurs(string namecurs)
         {
             List<Course> cursuri = _curs;
-            for(int i=0;i< cursuri.Count;i++)
+            for (int i = 0; i < cursuri.Count; i++)
             {
                 if (cursuri[i].NameCurs.Equals(namecurs))
                 {
@@ -63,10 +63,10 @@ namespace online_school.Courses.service
         }
         public Course GetCourseById(int idcurs)
         {
-            List<Course> curs= _curs;
-            for(int i=0;i< curs.Count; i++)
+            List<Course> curs = _curs;
+            for (int i = 0; i < curs.Count; i++)
             {
-                if (curs[i].Id==idcurs)
+                if (curs[i].Id == idcurs)
                 {
 
                     return curs[i];
@@ -78,7 +78,7 @@ namespace online_school.Courses.service
         {
             Random random = new Random();
             int randomNumber = random.Next(100, 10001);
-            while(GetCourseById(randomNumber) != null)
+            while (GetCourseById(randomNumber) != null)
             {
                 randomNumber = random.Next(100, 10001);
             }
@@ -91,12 +91,13 @@ namespace online_school.Courses.service
         }
         public void sortareAlfaCourse()
         {
-            for(int i=0;i< _curs.Count-1 ;i++)
+            for (int i = 0; i < _curs.Count - 1; i++)
             {
-                for(int j = i+1;j<_curs.Count;j++)
+                for (int j = i + 1; j < _curs.Count; j++)
                 {
-                    if (_curs[i].Departament.CompareTo(_curs[j].Departament)>0) {
-                         
+                    if (_curs[i].Departament.CompareTo(_curs[j].Departament) > 0)
+                    {
+
                         Course aux = _curs[i];
                         _curs[i] = _curs[j];
                         _curs[j] = aux;
@@ -109,10 +110,10 @@ namespace online_school.Courses.service
         {
             List<Course> curs = _curs;
             sortareAlfaCourse();
-            for(int i=0;i<curs.Count;i++)
+            for (int i = 0; i < curs.Count; i++)
             {
                 Console.WriteLine(curs[i].DescriereCurs());
-                
+
 
             }
 
@@ -122,7 +123,7 @@ namespace online_school.Courses.service
         public List<Course> FiltrarecursByProfesie(string studentFacultate)
         {
             List<Course> cursuri = new List<Course>();
-            for(int i =0;i<_curs.Count;i++)
+            for (int i = 0; i < _curs.Count; i++)
             {
                 if (_curs[i].Departament.Equals(studentFacultate))
                 {
@@ -132,20 +133,21 @@ namespace online_school.Courses.service
             }
             return cursuri;
         }
-       public bool ModificareCurs( Course DeUpdate, String NumeMod,string studentFacult)
+        public bool ModificareCurs(Course DeUpdate, String NumeMod, string studentFacult)
         {
             List<Course> cursmod = FiltrarecursByProfesie(studentFacult);
-            for(int i = 0; i < cursmod.Count; i++)
+            for (int i = 0; i < cursmod.Count; i++)
             {
-                if (NumeMod.Equals(cursmod[i])){
+                if (NumeMod.Equals(cursmod[i]))
+                {
 
 
-                    if(!DeUpdate.NameCurs.Equals(" "))
+                    if (!DeUpdate.NameCurs.Equals(" "))
                     {
                         cursmod[i].NameCurs = DeUpdate.NameCurs;
 
                     }
-                    if(!DeUpdate.Departament.Equals(" "))
+                    if (!DeUpdate.Departament.Equals(" "))
                     {
                         cursmod[i].Departament = DeUpdate.Departament;
 
@@ -160,11 +162,39 @@ namespace online_school.Courses.service
             }
             return false;
         }
-       
 
+        //functie ce primeste ca parametru o lista id si returneaza toate cursurile cu id respectiv
+        public List<Course> GetAllCourseByStudentCurs(List<int> Idcursuri)
+        {
+            List<Course> cursuri = new List<Course>();
+            for (int i = 0; i < _curs.Count; i++)
+            {
 
+                if (Idcursuri.Contains(_curs[i].Id))
+                {
 
+                    cursuri.Add(_curs[i]);
 
+                }
+
+            }
+
+            return cursuri;
+        }
+        public int FiltrareCursIdByName(string name)
+        {
+            for (int i = 0; i < _curs.Count; i++)
+            {
+                if (_curs[i].NameCurs.Equals(name))
+                {
+                    return _curs[i].Id;
+
+                }
+
+            }
+
+            return 0;
+        }
 
     }
 }

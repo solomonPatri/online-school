@@ -20,10 +20,10 @@ namespace online_school.Student.service
 
         public void load()
         {
-            Students s1 = new Students(1,"Mario","Matematica","solomonmario@gmail.com",18," ");
-            Students s2 = new Students(2, "Ana", "Inginerie", "MihaAna@yahoo.com", 23," ");
-            Students s3 = new Students(3,"Silviu","Informatica","silviu32@gmail.com",22, " ");
-            Students s4 = new Students(4, "Magda", "Literatura", "MMagdalena34@yahoo.com", 17, " ");
+            Students s1 = new Students(1,"Mario","Solomon","Matematica","solomonmario@gmail.com",18," ");
+            Students s2 = new Students(2, "Ana","Ardelean", "Inginerie", "MihaAna@yahoo.com", 23," ");
+            Students s3 = new Students(3,"Silviu","Dancanet","Informatica","silviu32@gmail.com",22, " ");
+            Students s4 = new Students(4, "Magda","Mustatean ","Literatura", "MMagdalena34@yahoo.com", 17, " ");
 
             _student.Add(s1);
             _student.Add(s2);

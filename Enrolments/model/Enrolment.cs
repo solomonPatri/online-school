@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace online_school.Enrolment.model
+namespace online_school.Enrolments.model
 {
     public  class Enrolment
     {
@@ -48,7 +48,12 @@ namespace online_school.Enrolment.model
             desc += "IdCurs: " + this._CursId + "\n";
             return desc;
         }
+        public Enrolment (int IdStudent,int CursId)
+        {
+            _studentid=IdStudent;
+            _CursId = CursId;
 
+        }
 
 
 

@@ -11,6 +11,7 @@ namespace online_school.Student.model
     {
         private int _id;
         private string _firstnameStudent;
+        private string _lastnameStudent;
         private string _facultate;
         private string _email;
         private int _age;
@@ -26,6 +27,11 @@ namespace online_school.Student.model
         {
             get { return _firstnameStudent; }
             set { _firstnameStudent = value; }
+        }
+        public string LastnameStudent
+        {
+            get { return _lastnameStudent; }
+            set { _lastnameStudent = value; }
         }
         public string Facultate
         {
@@ -57,6 +63,7 @@ namespace online_school.Student.model
         {
             string desc = " ";
             desc += "Prenume: " + this._firstnameStudent + "\n";
+            desc += "Nume: " + this._lastnameStudent + "\n";
             desc += "Facultate: " + this._facultate + "\n";
             desc += "Email: " + this._email + "\n";
             desc += "Varsta: " + this._age + "\n";
@@ -64,19 +71,21 @@ namespace online_school.Student.model
 
         }
 
-        public Students(int id,string FirstName,string Facultate,string Email,int Age,string pass)
+        public Students(int id,string FirstName,string LastName,string Facultate,string Email,int Age,string pass)
         {
             _id = id;
             _firstnameStudent= FirstName;
+            _lastnameStudent= LastName;
             _facultate= Facultate;
             _email = Email;
             _age = Age;
             _password = pass;
         }
-        public Students(int id,string Firstname)
+        public Students(int id,string Firstname,string LastName)
         {
             _id = id;
             _firstnameStudent = Firstname;
+            _lastnameStudent= LastName;
         }
 
 
