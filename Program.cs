@@ -7,7 +7,7 @@ using online_school.Enrolments.model;
 using online_school.Enrolments.Service;
 using online_school.Student.model;
 using online_school.Student.service;
-using online_school.Student.View4;
+using online_school.View4;
 
 internal class Program
 {

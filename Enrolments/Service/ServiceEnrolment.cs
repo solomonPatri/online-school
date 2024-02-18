@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using online_school.Enrolments.model;
+using online_school.Utile;
 
 namespace online_school.Enrolments.Service
 {
@@ -24,15 +25,21 @@ namespace online_school.Enrolments.Service
         {
             Enrolment e1 = new Enrolment(GenerateIdUnique(), 1, 10);
             Enrolment e2 = new Enrolment(GenerateIdUnique(), 19, 30);
-            Enrolment e3 = new Enrolment(GenerateIdUnique(), 19, 20);
-            Enrolment e4 = new Enrolment(GenerateIdUnique(), 19, 60);
-            Enrolment e5 = new Enrolment(GenerateIdUnique(), 3, 20);
+            Enrolment e3 = new Enrolment(GenerateIdUnique(), 23, 30);
+            Enrolment e4 = new Enrolment(GenerateIdUnique(), 45, 30);
+            Enrolment e5 = new Enrolment(GenerateIdUnique(), 56, 20);
+            Enrolment e6 = new Enrolment(GenerateIdUnique(), 3, 40);
+            Enrolment e7 = new Enrolment(GenerateIdUnique(), 26, 20);
+            Enrolment e8 = new Enrolment(GenerateIdUnique(), 26, 40);
 
             _enrolment.Add(e1);
             _enrolment.Add(e2);
             _enrolment.Add(e3);
             _enrolment.Add(e4);
             _enrolment.Add(e5);
+            _enrolment.Add(e6);
+            _enrolment.Add(e7);
+            _enrolment.Add(e8);
 
         }
         public void afisareEnrol()
@@ -132,8 +139,94 @@ namespace online_school.Enrolments.Service
                 }
             }
         }
+        private  int[] Frecventa()
+        {
+            int[] v = new int[1000];  // v[5]={10,30,30,30,20}
 
-   
+           for(int i = 0; i < _enrolment.Count; i++)   // i=0 la i=4
+            {
+                v[_enrolment[i].CursId]++;  // v[10]={1} , v[30] = {3}, v[20]={1}
+            }
+
+           return v; // v [3] = {1,3,1}
+
+        }
+
+        public List<FrecventaCurs> FrecventaCursuriSortate()
+        {
+
+            int[] freq = Frecventa();
+            List<FrecventaCurs> frecventaCurs = new List<FrecventaCurs>();
+            for(int i=1;i<freq.Length;i++)
+            {
+
+
+                if (freq[i] != 0)
+                {
+                    FrecventaCurs frecventa = new FrecventaCurs();
+                    frecventa.corsId = i;
+                    frecventa.corsFreq = freq[i];
+                    frecventaCurs.Add(frecventa);
+
+                }
+                   
+               
+            }
+            SortareFrecventa(frecventaCurs);
+            return frecventaCurs;
+
+        }
+        private  void SortareFrecventa(List<FrecventaCurs> frecventaCurs)
+        {
+
+            for(int i=0;i< frecventaCurs.Count - 1; i++)
+            {
+                for (int j = i + 1; j < frecventaCurs.Count; j++)
+                {
+                    if (frecventaCurs[i].corsFreq> frecventaCurs[j].corsFreq)
+                    {
+                        FrecventaCurs aux = frecventaCurs[i];
+                        frecventaCurs[i] = frecventaCurs[j];
+                        frecventaCurs[j] = aux;
+                        
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        public int FindMosPopularCourse()
+        {
+            int max = 0;
+            int pozitia = -1;
+            int[] v = Frecventa();
+            for(int i = 0; i < v.Length; i++)
+            {
+                if (v[i] > max)    
+                {
+                    max = v[i];     
+                    pozitia = i;
+                    
+                }
+            }
+            return pozitia;  //  v[2] = 3   return 2
+        }
+
+
+
+       
+        
+
+
+
+
+
+
+
+        
 
 
 

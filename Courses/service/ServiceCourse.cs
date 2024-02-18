@@ -1,5 +1,6 @@
 ﻿using online_school.Courses.model;
 using online_school.Student.model;
+using online_school.Utile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,17 @@ namespace online_school.Courses.service
             {
                 Console.WriteLine(_curs[i].DescriereCurs());
             }
+        }
+        public List<Course> GetCursuri()
+        {
+            List<Course> cursuri = new List<Course>();
+            for(int i =0; i < _curs.Count;i++)
+            {
+                cursuri.Add(_curs[i]);
+
+            }
+          return cursuri;
+
         }
         public bool deleteCurs(string namecurs)
         {
@@ -181,7 +193,7 @@ namespace online_school.Courses.service
 
             return cursuri;
         }
-        public int FiltrareCursIdByName(string name)
+        public int FindCourseByName(string name)
         {
             for (int i = 0; i < _curs.Count; i++)
             {
@@ -195,6 +207,34 @@ namespace online_school.Courses.service
 
             return 0;
         }
+
+        public int GetCourseById()
+        { 
+            for(int i=0;i< _curs.Count; i++)
+            {
+                return _curs[i].Id;
+
+            }
+            return 0;
+
+
+
+        }
+
+
+        public void PopupateFreqWithCourse(List<FrecventaCurs> frecventaCurs)
+        {
+
+            foreach(var freqCourse in frecventaCurs)
+            {
+               
+                freqCourse.course = GetCourseById(freqCourse.corsId)
+;
+            }
+        }
+
+
+
 
     }
 }
