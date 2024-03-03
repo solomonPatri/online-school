@@ -9,9 +9,9 @@ namespace online_school.Utile
 {
     public class FrecventaCurs
     {
-        public int corsId;
-        public int corsFreq;
-        public Course course;
+        public int corsId;   // id cursului ex:30
+        public int corsFreq; // nr de ori care este inscris  ex:3
+        public Course course; // cursul cu toate datele
 
 
         public string Info()

@@ -11,8 +11,7 @@ namespace online_school.Courses.model
         private int _id;
         private string _nameCurs;
         private string _departament;
-
-
+        private int _profesorId;
 
         public int Id
         {
@@ -33,11 +32,18 @@ namespace online_school.Courses.model
             set { _departament = value; }
 
         }
-        public Course (int Id,string NameCurs, string Departament)
+        public int Profesorid
+        {
+            get { return _profesorId; }
+            set { _profesorId = value; }
+
+        }
+        public Course (int Id,string NameCurs, string Departament,int profid)
         {
             _id = Id;
             _nameCurs = NameCurs;   
             _departament = Departament;
+            _profesorId= profid;
         }
 
         public Course (string nameCurs, string departament)

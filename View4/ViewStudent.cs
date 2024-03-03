@@ -36,7 +36,7 @@ namespace online_school.View4
         {
             _serviceenrol = new ServiceEnrolment();
             _servicecourse = new ServiceCourse();
-            _student = new Students(19, "Florin", "Dancanet", "Mecatronica", "dhfgr@33.yahoo", 25, "RED");
+            _student = new Students(19, "Florin", "Dancanet", "Mecatronica", "dhfgr@33.yahoo", 25, "RED",6);
         }
         public void meniu()
         {
@@ -119,7 +119,7 @@ namespace online_school.View4
             if (verificarea == true)
             {
 
-                Enrolment newEnrol = new Enrolment(_serviceenrol.GenerateIdUnique(), _student.Id, idCurs);
+                Enrolment newEnrol = new Enrolment(_serviceenrol.GenerateIdUnique(), idCurs);
                 _serviceenrol.adaugareEnrol(newEnrol);
                 var list = _serviceenrol.GetAllEnrolByStudentId(_student.Id);
 
@@ -181,11 +181,12 @@ namespace online_school.View4
         }
         public void AfisareToateCursuriId()
         {
-            List<FrecventaCurs> frecventaCurs = _serviceenrol.FrecventaCursuriSortate();
-            _servicecourse.PopupateFreqWithCourse(frecventaCurs);
+            List<FrecventaCurs> frecventaCurs = _serviceenrol.FrecventaCursuriSortate();//vectorul cu id-uri
+            _servicecourse.PopupateFreqWithCourse(frecventaCurs); // din v in cursuriafisate
             foreach(var freq in frecventaCurs)
             {
-                Console.WriteLine(freq.Info());
+                Console.WriteLine(freq.Info()); //afisare in functie de frecventa :
+                                                // -> cursul (NUME) are (NR DE FRECVENTA) participanti.
             }
         }
 

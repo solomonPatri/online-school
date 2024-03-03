@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using online_school.Enrolments.model;
+using online_school.Enrolments.Service;
 using online_school.Student.model;
 
 namespace online_school.Student.service
@@ -10,20 +12,21 @@ namespace online_school.Student.service
     public class ServiceStudent
     {
         private List<Students> _student;
+        private ServiceEnrolment _serviceenrolment;
 
         public ServiceStudent()
         {
-
+            _serviceenrolment = new ServiceEnrolment();
             _student = new List<Students>();
             this.load();
         }
 
         public void load()
         {
-            Students s1 = new Students(1,"Mario","Solomon","Matematica","solomonmario@gmail.com",18," ");
-            Students s2 = new Students(2, "Ana","Ardelean", "Inginerie", "MihaAna@yahoo.com", 23," ");
-            Students s3 = new Students(3,"Silviu","Dancanet","Informatica","silviu32@gmail.com",22, " ");
-            Students s4 = new Students(4, "Magda","Mustatean ","Literatura", "MMagdalena34@yahoo.com", 17, " ");
+            Students s1 = new Students(1,"Mario","Solomon","Matematica","solomonmario@gmail.com",18," ",7);
+            Students s2 = new Students(2, "Ana","Ardelean", "Inginerie", "MihaAna@yahoo.com", 23," ",3);
+            Students s3 = new Students(3,"Silviu","Dancanet","Informatica","silviu32@gmail.com",22, " ",5);
+            Students s4 = new Students(4, "Magda","Mustatean ","Literatura", "MMagdalena34@yahoo.com", 17, " ",9);
 
             _student.Add(s1);
             _student.Add(s2);
@@ -86,22 +89,39 @@ namespace online_school.Student.service
             return false;
         }
 
-        public List<Students> AfisareListaStudenti()
+
+        public List<Students> AfisareListaStudenti(List<int> studentids)
         {
-            List<Students> studentii = _student;
-
-            for(int i =0; i < studentii.Count; i++)
+           
+            List<Students> studenti = new List<Students>();
+            for (int i = 0; i < _student.Count; i++)
             {
-
-                Console.WriteLine(studentii[i].DescriereStudent());
-                Console.WriteLine("\n");
-
+                if (studentids.Contains(_student[i].Id))
+                {
+                    studenti.Add(_student[i]);
+                }
             }
-
-            return studentii;
+            return studenti;
+            
         }
+        public int mediaStudentilor(List<int> idstudenti)
+        {
+            int suma = 0;
+            int media = 0;
+            List<int> v = idstudenti;
+            for(int i=0;i<_student.Count;i++) {
 
+                if (v[i].Equals(_student[i].Id))
+                {
+                    suma += _student[i].Media;
+                    return suma / v[i];
 
+                }
+              
+            }
+            return 0;
+        }
+        
 
 
 

@@ -11,6 +11,8 @@ namespace online_school.Enrolments.model
         private int _id;
         private int _studentid;
         private int _CursId;
+        
+
 
         public int Id
         {
@@ -32,13 +34,21 @@ namespace online_school.Enrolments.model
             set { _CursId = value; }
 
         }
-
+        
         public Enrolment(int IdEnr,int IdStudent,int CursId)
         {
             _id = IdEnr;
             _studentid = IdStudent;
             _CursId = CursId;
+           
 
+        }
+        
+        public Enrolment(int IdStudent,int CursId)
+        {
+            _studentid=IdStudent;
+            _CursId = CursId;
+           
         }
         public string DescriereEnrolment()
         {
@@ -46,14 +56,19 @@ namespace online_school.Enrolments.model
             desc += "IdEnrolment: " + this._id + "\n";
             desc += "IdStudent: " + this._studentid + "\n";
             desc += "IdCurs: " + this._CursId + "\n";
+            
             return desc;
         }
-        public Enrolment (int IdStudent,int CursId)
+        public string DescriereEnrolmentProf()
         {
-            _studentid=IdStudent;
-            _CursId = CursId;
+            string desc = " ";
+            desc += "IdEnrolment: " + this._id + "\n";
+            desc += "IdCurs: " + this._CursId + "\n";
 
+            return desc;
         }
+
+
 
 
 

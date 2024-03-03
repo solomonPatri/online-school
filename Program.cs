@@ -13,10 +13,10 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        ViewStudent viewStudent = new ViewStudent();
-        viewStudent.Play();
+     ViewProfesor profesor = new ViewProfesor();
+       profesor.play();
+      
         
-
         
 
 

@@ -4,6 +4,7 @@ using online_school.Utile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,13 +23,13 @@ namespace online_school.Courses.service
 
         public void load()
         {
-            Course c1 = new Course(10, "Analiza matematica", "Matematica");
-            Course c2 = new Course(20, "Mecanica", "Inginerie");
-            Course c3 = new Course(30, "Literatura sec XI", "Romana");
-            Course c4 = new Course(40, "Algebra", "Matematica");
-            Course c5 = new Course(50, "Stefan cel mare ", "Istorie");
-            Course c6 = new Course(60, "Electronica", "Inginerie");
-            Course c7 = new Course(70, "Anatomie ", "Medicina");
+            Course c1 = new Course(10, "Analiza matematica", "Matematica",23);
+            Course c2 = new Course(20, "Mecanica", "Inginerie",23);
+            Course c3 = new Course(30, "Literatura sec XI", "Romana",18);
+            Course c4 = new Course(40, "Algebra", "Matematica",24);
+            Course c5 = new Course(50, "Stefan cel mare ", "Istorie",27);
+            Course c6 = new Course(60, "Electronica", "Inginerie",24);
+            Course c7 = new Course(70, "Anatomie ", "Medicina",27);
 
             _curs.Add(c1);
             _curs.Add(c2);
@@ -225,12 +226,43 @@ namespace online_school.Courses.service
         public void PopupateFreqWithCourse(List<FrecventaCurs> frecventaCurs)
         {
 
-            foreach(var freqCourse in frecventaCurs)
+            foreach(var freqCourse in frecventaCurs)  // imi ia fiecare frecventa din lista
             {
                
-                freqCourse.course = GetCourseById(freqCourse.corsId)
+                freqCourse.course = GetCourseById(freqCourse.corsId)  //imi da id-ul cursului in functia de ordine a frecventei
+               //v = {30,20,40,10} // imi da direct cursurile afisate
 ;
             }
+        }
+        public List<int> GetCourseByProfId(int idprof)
+        {
+            List<int> cursuri = new List<int>();
+            for(int i = 0; i < _curs.Count; i++)
+            {
+                if (_curs[i].Profesorid.Equals(idprof))
+                {
+                    cursuri.Add(_curs[i].Id);
+                    
+                }
+
+
+            }
+            return cursuri;
+        }
+        public List<Course> FindCourseByProf(int idprof)
+        {
+            List<Course> cursuri = new List<Course> ();
+            for(int i = 0; i < _curs.Count; i++)
+            {
+                if (_curs[i].Profesorid.Equals(idprof))
+                {
+                    cursuri.Add(_curs[i]);
+                }
+
+
+            }
+            return cursuri;
+
         }
 
 

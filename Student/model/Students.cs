@@ -16,6 +16,7 @@ namespace online_school.Student.model
         private string _email;
         private int _age;
         private string _password;
+        private int _media;
 
 
         public int Id
@@ -57,6 +58,11 @@ namespace online_school.Student.model
             set { _password = value; }
 
         }
+        public int Media
+        {
+            get { return _media; }
+            set { _media = value; }
+        }
 
 
         public string DescriereStudent()
@@ -67,11 +73,12 @@ namespace online_school.Student.model
             desc += "Facultate: " + this._facultate + "\n";
             desc += "Email: " + this._email + "\n";
             desc += "Varsta: " + this._age + "\n";
+            desc += "Media: " + this._media + "\n";
             return desc;
 
         }
 
-        public Students(int id,string FirstName,string LastName,string Facultate,string Email,int Age,string pass)
+        public Students(int id,string FirstName,string LastName,string Facultate,string Email,int Age,string pass,int medie)
         {
             _id = id;
             _firstnameStudent= FirstName;
@@ -80,6 +87,7 @@ namespace online_school.Student.model
             _email = Email;
             _age = Age;
             _password = pass;
+            _media = medie;
         }
         public Students(int id,string Firstname,string LastName)
         {
