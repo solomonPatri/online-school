@@ -20,7 +20,6 @@ namespace online_school.View4
     {
         private ServiceEnrolment _serviceenrol;
         private Profesor _prof;
-        private Profesor _prof2;
         private ServiceCourse _servicecurs;
         private ServiceStudent _servicestudenti;
         private ServiceProfesor _serviceprof;
@@ -30,24 +29,24 @@ namespace online_school.View4
             _serviceprof = new ServiceProfesor();
             _serviceenrol = new ServiceEnrolment();
             _servicecurs = new ServiceCourse();
-            _prof = new Profesor(23, "Grigore", 4987, "Inginerie", "grigoretiple @gmail.com"," ");
-            _prof2 = new Profesor(24, "Eduard", 3456, "Inginerie", "eduardtdr@gmail.es", " ");
+            _prof = new Profesor(23, "Grigore", 4987, "Inginerie", "grigoretiple @gmail.com", " ");
             _servicestudenti = new ServiceStudent();
             play();
         }
-        public void  meniu()
+        public void meniu()
         {
-   
+
             Console.WriteLine("1-> Afisare Cursuri predate");
             Console.WriteLine("2-> Studentii care le preda:");
-            Console.WriteLine("3->Cursul Profesorului Cu cei mai multi studenti");
-            Console.WriteLine("4->Cea mai mare medie a studentilor a cei doi profesori");
-            Console.WriteLine("5->Stergerea profesor:");
-            Console.WriteLine("6->Adaugare profesor:");
+            Console.WriteLine("3->Cursul cu cei mai multi studenti inscris");
+            Console.WriteLine("4->Media studentiilor din curs");
+            Console.WriteLine("5->Stergerea Curs:");
+            Console.WriteLine("6->Adaugare Curs:");
+            Console.WriteLine("7->Modificare curs:");
 
             //todo: 10 functionalitati
 
-            
+
 
 
 
@@ -59,29 +58,29 @@ namespace online_school.View4
             {
                 meniu();
                 int nrales = int.Parse(Console.ReadLine());
-                switch(nrales)
+                switch (nrales)
                 {
 
                     case 1:
-                         afisareCursuriProf();
+                        afisareCursuriProf();
                         break;
                     case 2:
-                       StudentiByProfesor();
+                        StudentiByProfesor();
                         break;
                     case 3:
                         CursProfesorMaxStudenti();
                         break;
                     case 4:
-                        MediaCelorDoiProfesori();
+                       MediaStudentilor();
                         break;
                     case 5:
-                        stergereProfesor();
+                        stergereCurs();
                         break;
                     case 6:
-                        AdaugareProfesor();
+                        AdaugareCursByProf();
                         break;
                     case 7:
-                       
+                        ModificareCurs();
                         break;
 
 
@@ -94,18 +93,18 @@ namespace online_school.View4
 
 
         }
-        
+
         public void afisareCursuriProf()
         {
             Console.WriteLine("Cursuriile care preda " + _prof.Nume + " sunt: " + "\n");
             var list = _servicecurs.FindCourseByProf(_prof.IdProfesor);
-            for(int i =0;i< list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 Console.WriteLine(list[i].DescriereCurs());
 
             }
-            
-           
+
+
         }
         public void StudentiByProfesor()
         {
@@ -121,102 +120,96 @@ namespace online_school.View4
         public void CursProfesorMaxStudenti()
         {
             List<Course> cursurile = _servicecurs.GetCursuri();
-            Console.WriteLine("Cursurile care are profesorul sunt: "+"\n");
-              List<int> idiuri = _servicecurs.GetCourseByProfId(23);
-            for(int i = 0; i < idiuri.Count; i++)
-            {   
+            Console.WriteLine("Cursurile care are profesorul sunt: " + "\n");
+            List<int> idiuri = _servicecurs.GetCourseByProfId(23);
+            for (int i = 0; i < idiuri.Count; i++)
+            {
                 if (cursurile[i].Id.Equals(idiuri[i]))
                 {
-                    
+
                     Console.WriteLine(cursurile[i].DescriereCurs());
                 }
-
             }
+        }
 
+        public void MediaStudentilor()
+        { 
+            List<int> idiuri = _servicecurs.GetCourseByProfId(_prof.IdProfesor);
+            List<int> idStudent = _serviceenrol.GetAllStudentIdByCursId(idiuri);
+            List<Students> courses = _servicestudenti.AfisareListaStudenti(idStudent);
+            float suma = 0;
+            for(int i=0;i<courses.Count;i++)
+            { 
+                suma += courses[i].Media;
+            }
+            Console.WriteLine("Studenti din curs au media: ");
+            Console.WriteLine(suma / courses.Count);
+          
+        }
+
+        public void AdaugareCursByProf()
+        {
+            Console.WriteLine("Introduceti datele cursului: " + "\n");
+            Console.WriteLine("Numele: ");
+            string nameCurs = Console.ReadLine();
+            Console.WriteLine("Departament: ");
+            string departament = Console.ReadLine();
+
+            Course newcurs = new Course(_servicecurs.GenerateIdUniqueCurs(), nameCurs, departament, _prof.IdProfesor);
+            _servicecurs.adaugareCurs(newcurs);
+            Console.WriteLine("Acum cursuri disponibile sunt: " + "\n");
+            _servicecurs.AfisareListaCourse();
 
 
 
         }
-
-        public void MediaCelorDoiProfesori()
+        public void stergereCurs()
         {
-            List<int> idprof1 = _servicecurs.GetCourseByProfId(_prof.IdProfesor);
-            List<int> idprof2 = _servicecurs.GetCourseByProfId(_prof2.IdProfesor);
-            List<int> idstud1 = _serviceenrol.GetAllStudentIdByCursId(idprof1);
-            List<int> idstud2 = _serviceenrol.GetAllStudentIdByCursId(idprof2);
-            int mediastudprof1 = _servicestudenti.mediaStudentilor(idstud1);
-            int mediastudprof2 = _servicestudenti.mediaStudentilor(idstud2);
-            int maxmedia = 0;
-            if(mediastudprof1> mediastudprof2)
+            Console.WriteLine("Introduceti numele Cursul  care doriti sa stergeti: ");
+            string nume = Console.ReadLine();
+
+            bool verf = _servicecurs.DeleteCursByIdProfesor(nume,_prof.IdProfesor);
+            if (verf)
             {
-                maxmedia = mediastudprof1;
+                Console.WriteLine("Cursul a fost sters");
+                _servicecurs.AfisareCursuriByProfId(_prof.IdProfesor);
             }
             else
             {
-                maxmedia = mediastudprof2;
+                Console.WriteLine("Nu exista acest Curs in lista.");
             }
-
-            Console.WriteLine("Profesorul cu media cea mai mare la studenti este: " + maxmedia);
-
-
-
-
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-        public void AdaugareProfesor()
+        public void ModificareCurs()
         {
-            Console.WriteLine("Adaugati datele nului profesor" + "\n");
-            Console.WriteLine("Nume:" + "\n");
-            string nume = Console.ReadLine();
-            Console.WriteLine("nr de studenti :"+"\n");
-            int nrstud = int.Parse(Console.ReadLine());
-            Console.WriteLine("Facultate: "+"\n");
-            string fac = Console.ReadLine();
-            Console.WriteLine("email: " + "\n");
-            string email = Console.ReadLine();
-            Console.WriteLine("Parola: ");
-            string parola = Console.ReadLine();
-            
-            Profesor newprof = new Profesor(_serviceprof.GenerateProfesorId(),nume,nrstud,fac,email,parola);
-            _serviceprof.adaugareProf(newprof);
-            _serviceprof.afisare();
-
-        }
-        public void stergereProfesor()
-        {
-            Console.WriteLine("Introduceti numele profesorului care doriti sa stergeti: " + "\n");
-            string nume = Console.ReadLine();
-
-            bool verf = _serviceprof.DeleteProf(nume);
-            if(verf = true)
+            Console.WriteLine("Introduceti numele Cursului care doriti sa modificati:");
+            string numecurs = Console.ReadLine();
+            Console.WriteLine("Introduceti noul nume: ");
+            string newnume = Console.ReadLine();
+            Console.WriteLine("Introduceti noul nume departament:");
+            string departament = Console.ReadLine() ;
+            Course modfCurs = new Course(0,newnume,departament,_prof.IdProfesor);
+            bool verificare = _servicecurs.ModificareCursByProfesorId(modfCurs,numecurs,_prof.IdProfesor);
+             if (verificare)
             {
-                Console.WriteLine("Profesorul a fost sters");
-                _serviceprof.afisare();
+                Console.WriteLine("A fost modificat cu succes." + "\n");
+                Console.WriteLine("Acum lista este ");
+                _servicecurs.AfisareCursuriByProfId(_prof.IdProfesor);
+
             }
             else
             {
-                Console.WriteLine("Nu exista acest profesor in lista.");
+                Console.WriteLine("Cursul nu poate fi modificat");
             }
 
+
         }
-
-        
-
 
 
 
 
     }
+
 }
+    
+

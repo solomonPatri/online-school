@@ -74,6 +74,23 @@ namespace online_school.Courses.service
             }
             return false;
         }
+        public bool DeleteCursByIdProfesor(string numecurs,int Idprof)
+        {
+            List<Course> cursuri = _curs;
+            for(int i = 0; i < cursuri.Count; i++)
+            {
+                if (cursuri[i].Profesorid.Equals(Idprof))
+                {
+                    if (cursuri[i].NameCurs.Equals(numecurs))
+                    {
+                        _curs.Remove(cursuri[i]);
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        }
         public Course GetCourseById(int idcurs)
         {
             List<Course> curs = _curs;
@@ -175,6 +192,13 @@ namespace online_school.Courses.service
             }
             return false;
         }
+      
+
+
+
+
+
+
 
         //functie ce primeste ca parametru o lista id si returneaza toate cursurile cu id respectiv
         public List<Course> GetAllCourseByStudentCurs(List<int> Idcursuri)
@@ -264,7 +288,55 @@ namespace online_school.Courses.service
             return cursuri;
 
         }
+        public void AfisareCursuriByProfId(int idProf)
+        {
+            List<Course> cursuri = new List<Course>();
+            for(int i=0;i<_curs.Count;i++)
+            {
+                if (_curs[i].Profesorid.Equals(idProf))
+                {
+                    cursuri.Add(_curs[i]);
+                    Console.WriteLine(cursuri[i].DescriereCurs());
+                }
+            }
 
+        }
+        public List<Course> GetCourseAllByProfId(int idprof)
+        {
+            List<Course> cursuri = new List<Course>();
+            for (int i = 0; i < _curs.Count; i++)
+            {
+                if (_curs[i].Profesorid.Equals(idprof))
+                {
+                    cursuri.Add(_curs[i]);
+
+                }
+
+
+            }
+            return cursuri;
+        }
+        public bool ModificareCursByProfesorId(Course modfCurs,String Nume,int Idprof)
+        {
+            List<Course> cursuri = GetCourseAllByProfId(Idprof);
+            for(int i = 0; i < cursuri.Count; i++)
+            {
+                if (Nume.Equals(cursuri[i].NameCurs))
+                {
+                    if (!modfCurs.NameCurs.Equals(cursuri[i].NameCurs))
+                    {
+                        cursuri[i].NameCurs = modfCurs.NameCurs;
+                    }
+                    if (!modfCurs.Departament.Equals(cursuri[i].Departament))
+                    {
+                        cursuri[i].Departament = modfCurs.Departament;
+                    }
+                    return true;
+
+                }
+            }
+            return false;
+        }
 
 
 

@@ -26,8 +26,7 @@ namespace online_school.Student.service
             Students s1 = new Students(1,"Mario","Solomon","Matematica","solomonmario@gmail.com",18," ",7);
             Students s2 = new Students(2, "Ana","Ardelean", "Inginerie", "MihaAna@yahoo.com", 23," ",3);
             Students s3 = new Students(3,"Silviu","Dancanet","Informatica","silviu32@gmail.com",22, " ",5);
-            Students s4 = new Students(4, "Magda","Mustatean ","Literatura", "MMagdalena34@yahoo.com", 17, " ",9);
-
+            Students s4 = new Students(4,"Magda","Mustatea","Literatura","magdamaria@yahoo.com",34," ",8);
             _student.Add(s1);
             _student.Add(s2);
             _student.Add(s3);
@@ -104,16 +103,16 @@ namespace online_school.Student.service
             return studenti;
             
         }
-        public int mediaStudentilor(List<int> idstudenti)
+        public int mediaStudentilor(List<int> idstudenti) //prof1 idstduenti
         {
             int suma = 0;
             int media = 0;
-            List<int> v = idstudenti;
+            List<int> v = idstudenti; //v={1,2,4}
             for(int i=0;i<_student.Count;i++) {
 
-                if (v[i].Equals(_student[i].Id))
+                if (_student[i].Id.Equals(v[i]))  //if(1=studentul 1  
                 {
-                    suma += _student[i].Media;
+                    suma += _student[i].Media;  
                     return suma / v[i];
 
                 }
