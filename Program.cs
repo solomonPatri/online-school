@@ -13,9 +13,8 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-     ViewProfesor profesor = new ViewProfesor();
-       profesor.play();
-      
+        ViewLogin login = new ViewLogin();
+        login.play();
         
         
 

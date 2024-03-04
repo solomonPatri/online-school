@@ -32,11 +32,11 @@ namespace online_school.View4
         //-->Afisarea cursul cel mai popular //5
         //Afisare cursuru in functie de popular//6
 
-        public ViewStudent()
+        public ViewStudent(Students student)
         {
             _serviceenrol = new ServiceEnrolment();
             _servicecourse = new ServiceCourse();
-            _student = new Students(19, "Florin", "Dancanet", "Mecatronica", "dhfgr@33.yahoo", 25, "RED",6);
+            _student = student;
         }
         public void meniu()
         {

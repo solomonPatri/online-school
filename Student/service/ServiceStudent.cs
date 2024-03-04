@@ -23,10 +23,10 @@ namespace online_school.Student.service
 
         public void load()
         {
-            Students s1 = new Students(1,"Mario","Solomon","Matematica","solomonmario@gmail.com",18," ",7);
-            Students s2 = new Students(2, "Ana","Ardelean", "Inginerie", "MihaAna@yahoo.com", 23," ",3);
-            Students s3 = new Students(3,"Silviu","Dancanet","Informatica","silviu32@gmail.com",22, " ",5);
-            Students s4 = new Students(4,"Magda","Mustatea","Literatura","magdamaria@yahoo.com",34," ",8);
+            Students s1 = new Students(1,"Mario","Solomon","Matematica","solomonmario@gmail.com",18,"Mario23",7);
+            Students s2 = new Students(2, "Ana","Ardelean", "Inginerie", "MihaAna@yahoo.com", 23,"ana234",3);
+            Students s3 = new Students(3,"Silviu","Dancanet","Informatica","silviu32@gmail.com",22, "silviu245",5);
+            Students s4 = new Students(4,"Magda","Mustatea","Literatura","magdamaria@yahoo.com",34,"magda987",8);
             _student.Add(s1);
             _student.Add(s2);
             _student.Add(s3);
@@ -121,7 +121,22 @@ namespace online_school.Student.service
             return 0;
         }
         
+        public Students GetStudentByLogin(string email,string password)
+        {
+            for(int i =0; i < _student.Count; i++)
+            {
+                if (_student[i].Email.Equals(email) && _student[i].Password.Equals(password)) { 
+                
+                  return _student[i];
+                
+                }
 
+
+            }
+            return null;
+
+
+        }
 
 
 

@@ -24,13 +24,13 @@ namespace online_school.View4
         private ServiceStudent _servicestudenti;
         private ServiceProfesor _serviceprof;
 
-        public ViewProfesor()
+        public ViewProfesor(Profesor profesor)
         {
             _serviceprof = new ServiceProfesor();
             _serviceenrol = new ServiceEnrolment();
             _servicecurs = new ServiceCourse();
-            _prof = new Profesor(23, "Grigore", 4987, "Inginerie", "grigoretiple @gmail.com", " ");
             _servicestudenti = new ServiceStudent();
+            _prof=profesor;
             play();
         }
         public void meniu()

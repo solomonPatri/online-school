@@ -18,10 +18,10 @@ namespace online_school.Profesorii.service
         }
         public void load()
         {
-            Profesor p1 = new Profesor(67, "Mircea", 234, "Medicina", "svfdc@gmail.com"," ");
-            Profesor p2 = new Profesor(24,"Maria",2531,"Mecanica","maria34@yahoo.com", "");
-            Profesor p3 = new Profesor(22,"Raluca ",3554,"Mate-Info","ralnuv@gmail.com", "");
-            Profesor p4 = new Profesor (3,"Silviu",2340,"Informatica","dancsilv@gmail.com", "");
+            Profesor p1 = new Profesor(67, "Mircea", 234, "Medicina", "svfdc@gmail.com","mircea1234");
+            Profesor p2 = new Profesor(24,"Maria",2531,"Mecanica","maria34@yahoo.com", "maria2345");
+            Profesor p3 = new Profesor(22,"Raluca ",3554,"Mate-Info","ralnuv@gmail.com", "raluca3456");
+            Profesor p4 = new Profesor (3,"Silviu",2340,"Informatica","dancsilv@gmail.com", "silviu4567");
 
             _serviceprof.Add(p1);
             _serviceprof.Add(p2);
@@ -85,8 +85,36 @@ namespace online_school.Profesorii.service
             }
             return false;
         }
+        public bool VerificareExistenta(Profesor newprof)
+        {
+            for(int i = 0; i < _serviceprof.Count; i++)
+            {
+                if (_serviceprof[i].Equals(newprof))
+                {
+                    return true;
+                }
 
-        
+            }
+            return false;
+
+
+
+        }
+        public Profesor GetProfByLogin(string email,string password)
+        {
+            for(int i =0;i<_serviceprof.Count;i++)
+            {
+                if (_serviceprof[i].Email.Equals(email) && _serviceprof[i].Password.Equals(password))
+                {
+                    return _serviceprof[i];
+                }
+
+
+            }
+            return null;
+
+
+        }
 
 
 
